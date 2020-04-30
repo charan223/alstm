@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn import Parameter
 from torch.autograd import Variable
-from torch.nn._functions.thnn import rnnFusedPointwise as fusedBackend
+# from torch.nn._functions.thnn import rnnFusedPointwise as fusedBackend
 
 from .utils import Project, VariationalDropout, chunk, convert, get_sizes, init_hidden
 
@@ -67,7 +67,7 @@ class aRNNCell(nn.modules.rnn.RNNCellBase):
     """
 
     def __init__(self, input_size, hidden_size, use_bias=True):
-        super(aRNNCell, self).__init__()
+        super(aRNNCell, self).__init__(input_size, hidden_size, bias=use_bias, num_chunks=1)
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.use_bias = use_bias
